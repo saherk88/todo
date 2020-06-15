@@ -8,6 +8,7 @@ export default function Todo({todo, index,deleteTodo}) {
             {todo.text}
             <div>
                 <button onClick= {()=> deleteTodo(index)} >x</button>
+                <button onClick= {()=> changeToDo(index)} >x</button>
             </div>
         </div>
     )
