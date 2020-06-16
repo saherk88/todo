@@ -1,7 +1,11 @@
 import React , {useState} from 'react';
+import './App.css';
 import Todo from './conponents/Todo'
 import TodoForm from './conponents/TodoForm'
-import './App.css';
+import {useRef} from 'react'
+
+
+
 
 function App() {
  
@@ -27,15 +31,23 @@ function App() {
       newTodos.splice(index,1);
       setTodos(newTodos);
     }
+    const inputRef = useRef()
+
+    const changeTodo = (text) => {
+      
+      inputRef.current = [{text}]
+      }
     
   return (
     
     <div className ="app">
         <div className="todo-list">
-          <div className="task"> <p>Tasks</p> </div>
+          <div className="task"> <p>Todo List</p> </div>
           {todos.map((todo, index) => (
             <Todo key={index} index={index} todo={todo}
-            deleteTodo={deleteTodo} />
+            deleteTodo={deleteTodo}
+            changeTodo={changeTodo}
+             />
           ))}
           <TodoForm addTodo={addTodo} />
         </div>

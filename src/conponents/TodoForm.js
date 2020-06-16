@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useRef} from 'react'
 
 
 function TodoForm({addTodo}) {
@@ -10,12 +11,14 @@ function TodoForm({addTodo}) {
         addTodo(value);
         setValue('');
     };
+    const inputRef = useRef()
+    
     
     return (
             <form onSubmit={handleSubmit}>
                 <input type="text" className="input" value={value}
                      onChange={e => setValue(e.target.value)}
-                     placeholder="add todo ..." />
+                     placeholder="add todo ..." ref={inputRef} />
             </form>
     )
 }
