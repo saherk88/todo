@@ -10,10 +10,10 @@ export default function Todo({todo, index,deleteTodo,changeTodo}) {
             {todo.text}
             <div>
 
-                <button onClick= {()=> deleteTodo(index)} >x</button>
-                <button onClick= {()=> {changeTodo(index)}} >Edit</button>
-                
+                <button onClick= {()=>{deleteTodo(index)}}>x</button>
+                <button onClick= {()=>{changeTodo(index)}} >Edit</button>    
             </div>
+      
         </div>
     )
   }

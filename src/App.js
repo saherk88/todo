@@ -1,15 +1,14 @@
 import React , {useState} from 'react';
+import {useRef} from 'react'
 import './App.css';
 import Todo from './conponents/Todo'
-import TodoForm from './conponents/TodoForm'
-import {useRef} from 'react'
 
 
 
 
 function App() {
  
-
+  const [value, setValue] = useState('');
   const [todos, setTodos] = useState([
     {
       text: 'Learn react'
@@ -31,12 +30,27 @@ function App() {
       newTodos.splice(index,1);
       setTodos(newTodos);
     }
-    const inputRef = useRef()
-
-    const changeTodo = (text) => {
+    
+    const changeTodo = (index, text) => {
+      const select = todos.find((item,ind)=> ind === index)
       
-      inputRef.current = [{text}]
-      }
+      console.log (select)
+      // setValue({value : todos.text})
+     
+      const todo = todos.filter((item,ind)=> ind !== index)
+      inputRef.current.value= select.text
+      setTodos([...todo,{text: value}])
+      setValue('');
+
+        }
+
+      const handleSubmit = e => {
+        e.preventDefault();
+        if(!value) return;
+        addTodo(value);
+        setValue('');
+    };
+    const inputRef = useRef()
     
   return (
     
@@ -49,7 +63,11 @@ function App() {
             changeTodo={changeTodo}
              />
           ))}
-          <TodoForm addTodo={addTodo} />
+          <form onSubmit={handleSubmit}>
+                <input type="text" className="input"
+                     onChange={e => setValue(e.target.value)}
+                     placeholder="add todo ..." ref={inputRef}/>
+            </form>
         </div>
     </div>
   )
